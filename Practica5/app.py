@@ -1,5 +1,5 @@
 
-from flask import Flask #importación de libreria
+from flask import Flask, render_template, request #importación de librerias
 
 #iniciazicón del servidor Flask
 
@@ -17,11 +17,18 @@ app.config['MYSQL_DB']="dbflask"
 #La ruta se compone del nombre de la ruta y su función
 @app.route('/')
 def index():
-    return "Hola Yorch Godina Mejorado"
+    return render_template ('index.html') #Render template genera la vista y la podamos ver
 
-@app.route('/guardar')
+@app.route('/guardar',methods=['POST']) #Manera de definir las rutas
 def guardar():
-    return "Se guardo el registro en la BD correctamente"
+    if request.method == 'POST':
+        titulo = request.form['txtTitulo']
+        artista = request.form['txtArtista']
+        anio = request.form['txtAnio']
+        print(titulo,artista,anio)
+
+    
+    return "La info del album llego a la ruta Sirrrrr"
 
 @app.route('/eliminar')
 def eliminar():
