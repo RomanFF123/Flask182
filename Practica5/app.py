@@ -1,6 +1,6 @@
 
-from flask import Flask, render_template, request #importación de librerias
-
+from flask import Flask, render_template, request, redirect, url_for, flash #importación de librerias
+from flask_mysqldb import MySQL
 #iniciazicón del servidor Flask
 
 #Configuración para la BD
@@ -10,6 +10,8 @@ app.config['MYSQL_USER']="root"
 app.config['MYSQL_PASSWORD']=""
 app.config['MYSQL_DB']="dbflask"
 
+app.secret_key='mysecretkey'
+mysql = MySQL(app)
 
 #Declaración de Ruta 
 
@@ -25,10 +27,15 @@ def guardar():
         titulo = request.form['txtTitulo']
         artista = request.form['txtArtista']
         anio = request.form['txtAnio']
-        print(titulo,artista,anio)
-
+        # print(titulo,artista,anio)
+        CS = mysql.connection.cursor() #Variable de tipo cursor que contiene las herramientas paara realizar los querys
+        CS.execute("INSERT INTO albums (titulo, artista, anio) VALUES (%s, %s, %s)", (titulo, artista, anio))
+        mysql.connection.commit()
     
-    return "La info del album llego a la ruta Sirrrrr"
+    flash('Album Agregado Correctamente')    
+
+    return redirect(url_for('index'))
+    
 
 @app.route('/eliminar')
 def eliminar():
