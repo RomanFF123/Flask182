@@ -41,9 +41,59 @@ def guardar():
 def eliminar():
     return "Se elemino de la BD"
 
+@app.route('/editar/<id>')
+def editar(id):
+    curEditar = mysql.connection.cursor()
+    curEditar.execute('select * from albums where id= %s',(id,))
+    consultId= curEditar.fetchone()
+    
+    return render_template('editarAlbum.html',album= consultId)
+
+@app.route('/actualizar/<id>',methods=['POST']) #Manera de definir las rutas
+def actualizar(id):
+    
+    if request.method == 'POST':
+        
+        titulo = request.form['txtTitulo']
+        artista = request.form['txtArtista']
+        anio = request.form['txtAnio']
+        
+    curAct= mysql.connection.cursor()
+    curAct.execute('update albums set titulo=%s, atista= %s, anio=%s where id=%s', (titulo, artista, anio, id)) # %s
+    mysql.connection.commit()
+    
+    flash('Album Actualizado Correctamente')    
+    return redirect(url_for('index'))
+
+@app.route('/eliminar/<id>')
+def eliminar(id):
+    curEditar = mysql.connection.cursor()
+    curEditar.execute('select * from albums where id= %s',(id,))
+    consultId= curEditar.fetchone()
+    
+    return render_template('editarAlbum.html',album= consultId)
+
+@app.route('/actualizar/<id>',methods=['POST']) #Manera de definir las rutas
+def actualizar(id):
+    
+    if request.method == 'POST':
+        
+        titulo = request.form['txtTitulo']
+        artista = request.form['txtArtista']
+        anio = request.form['txtAnio']
+        
+    curAct= mysql.connection.cursor()
+    curAct.execute('update albums set titulo=%s, atista= %s, anio=%s where id=%s', (titulo, artista, anio, id)) # %s
+    mysql.connection.commit()
+    
+    flash('Album Actualizado Correctamente')    
+    return redirect(url_for('index'))
+
+
+
+
 
 # Lineas que ejecutan el servidor
 if __name__ =='__main__':
     app.run(port= 5000, debug=True)
-    
     
