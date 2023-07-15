@@ -15,17 +15,14 @@ app.secret_key='mysecretkey'
 mysql = MySQL(app)
 
 
+
 @app.route('/')
 def index():
-    return render_template ('index.html')
-
-@app.route('/consulta')
-def consul():
     cursorSelect= mysql.connection.cursor()
-    cursorSelect.execute("SELECT * FROM db_floreria.tbflores;")
+    cursorSelect.execute("SELECT * FROM tbFlores;")
     consulta= cursorSelect.fetchall()
     #print(consulta)
-    return render_template(listFlores= consulta)
+    return render_template('index.html',listFlores= consulta)
 
 
 
@@ -48,15 +45,18 @@ def guardar():
 
 
 #Ruta Eliminar
-@app.route('/eliminar/<id>', methods=['POST'])
+@app.route('/eliminar/<id>')
 def eliminar(id):
     curEliminar = mysql.connection.cursor()
     curEliminar.execute('DELETE FROM tbFlores WHERE id = %s', (id))
     mysql.connection.commit()
     
-    flash('Álbum Eliminado Correctamente')
-    return redirect(url_for('index'))
+    flash('El Registro se ha Eliminado Correctamente')
+    return redirect(url_for('index.html'))
 
+@app.route('/tabla')
+def consultar():
+    return render_template ('consulta.html') 
 
 
 if __name__ =='__main__':

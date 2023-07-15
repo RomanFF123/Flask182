@@ -60,6 +60,7 @@ def actualizar(id):
 @app.route('/eliminar/<id>')
 def eliminar(id):
     curEditar = mysql.connection.cursor()
+    curEditar.execute('select * from inventario where id= %s',(id,))
     consultId= curEditar.fetchone()
     
     return render_template('editarfrutas.html',fruta= consultId)

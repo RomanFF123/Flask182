@@ -24,10 +24,10 @@
     <tbody>
         {% for tbFlores in listFlores %}
             <tr>
-                <td>{{ Flores.0 }}</td>
-                <td>{{ Flores.1 }}</td>
-                <td>{{ Flores.2 }}</td>
-                <td>{{ Flores.3 }}</td>
+                <td>{{ tbFlores.0 }}</td>
+                <td>{{ tbFlores.1 }}</td>
+                <td>{{ tbFlores.2 }}</td>
+                <td>{{ tbFlores.3 }}</td>
                 <td><a href="/eliminar/{{ tbFlores.id }}">Eliminar</a></td>
             </tr>
         {% endfor %}
