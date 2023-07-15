@@ -90,6 +90,14 @@ def actualizar(id):
     return redirect(url_for('index'))
 
 
+@app.route('/eliminar/<id>', methods=['GET', 'POST'])
+def eliminar(id):
+    curEliminar = mysql.connection.cursor()
+    curEliminar.execute('DELETE FROM albums WHERE id = %s', (id,))
+    mysql.connection.commit()
+    
+    flash('Álbum Eliminado Correctamente')
+    return redirect(url_for('index'))
 
 
 

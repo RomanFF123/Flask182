@@ -1,0 +1,21 @@
+<table>
+    <thead></thead>
+    <tr>
+       <td>ID:</td>
+       <td>Nombre:</td>
+       <td>Artista:</td>
+       <td>Año de publicación:</td> 
+    </tr>
+    <tbody>
+        {% for fruta in listAlbums %}
+            <tr>
+                <td>{{ fruta.0 }}</td>
+                <td>{{ fruta.1 }}</td>
+                <td>{{ fruta.2 }}</td>
+                <td>{{ fruta.3 }}</td>
+                <td><a href="/editar/{{ fruta.0 }}">Editar</a></td>
+                <td><a href="/eliminar/{{ fruta.id }}">Eliminar</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

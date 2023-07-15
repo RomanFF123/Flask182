@@ -1,0 +1,20 @@
+<table>
+    <thead></thead>
+    <tr>
+       <td>ID:</td>
+       <td>Nombre:</td>
+       <td>Cantidad:</td>
+       <td>Precio:</td> 
+    </tr>
+    <tbody>
+        {% for Flores in listFlores %}
+            <tr>
+                <td>{{ Flores.0 }}</td>
+                <td>{{ Flores.1 }}</td>
+                <td>{{ Flores.2 }}</td>
+                <td>{{ Flores.3 }}</td>
+                <td><a href="/eliminar/{{ Flores.id }}">Eliminar</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
