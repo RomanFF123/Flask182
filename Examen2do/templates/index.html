@@ -8,28 +8,8 @@
     <input type="decimal" name="txtPrecio" placeholder="Escribe el Precio: ">
 
     <button type="submit">Guardar</button>
+    <a href="/tabla" class="button">Ver Registros</a>
 
 </form>
 </center>
 <br>
-
-<table>
-    <thead></thead>
-    <tr>
-       <td>ID:</td>
-       <td>Nombre:</td>
-       <td>Cantidad:</td>
-       <td>Precio:</td> 
-    </tr>
-    <tbody>
-        {% for tbFlores in listFlores %}
-            <tr>
-                <td>{{ tbFlores.0 }}</td>
-                <td>{{ tbFlores.1 }}</td>
-                <td>{{ tbFlores.2 }}</td>
-                <td>{{ tbFlores.3 }}</td>
-                <td><a href="/eliminar/{{ tbFlores.id }}">Eliminar</a></td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>

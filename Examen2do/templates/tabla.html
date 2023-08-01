@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consulta de datos</title>
+    <link rel="stylesheet" href="../static/CSS/busqueda.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta de datos</h1>
+        <div class="filter">
+            <label for="filter-input">Filtrar por:</label>
+            <input type="text" id="filter-input" name="filter-input" placeholder="Ingresa el criterio de filtrado">
+            <button id="filter-button">Filtrar</button>
+        </div>
+        <table>
+            <thead></thead>
+            <tr>
+               <td>ID:</td>
+               <td>Nombre:</td>
+               <td>Cantidad:</td>
+               <td>Precio:</td> 
+            </tr>
+            <tbody>
+                {% for tbFlores in listFlores %}
+                    <tr>
+                        <td>{{ tbFlores.0 }}</td>
+                        <td>{{ tbFlores.1 }}</td>
+                        <td>{{ tbFlores.2 }}</td>
+                        <td>{{ tbFlores.3 }}</td>
+                        <td><a href="/eliminar/{{ tbFlores.id }}">Eliminar</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -15,14 +15,17 @@ app.secret_key='mysecretkey'
 mysql = MySQL(app)
 
 
-
 @app.route('/')
 def index():
+    return render_template ('index.html')
+
+@app.route('/tabla')
+def tabla():
     cursorSelect= mysql.connection.cursor()
     cursorSelect.execute("SELECT * FROM tbFlores;")
     consulta= cursorSelect.fetchall()
     #print(consulta)
-    return render_template('index.html',listFlores= consulta)
+    return render_template('consulta.html',listFlores= consulta)
 
 
 
@@ -54,9 +57,6 @@ def eliminar(id):
     flash('El Registro se ha Eliminado Correctamente')
     return redirect(url_for('index.html'))
 
-@app.route('/tabla')
-def consultar():
-    return render_template ('consulta.html') 
 
 
 if __name__ =='__main__':

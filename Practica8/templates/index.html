@@ -1,0 +1,59 @@
+{%extends 'platilla.html'%}
+
+{%block body%}
+    
+
+    {%with mensajes= get_flashed_messages() %}
+     {% if mensajes%}
+      {% for msj in mensajes %}
+        <h3>{{ msj }}</h3>
+      {% endfor %}
+     {% endif %}
+    {%endwith%}
+
+    
+    <h1>Gestion de Albums</h1>
+   
+        <div class="row">
+           <div class="col-md-5"></div>
+           <div class="col-md-7"></div>
+        </div>
+    <form action="/guardar" method="POST">
+        <input type="text" name="txtTitulo" placeholder="Escribe Titulo">
+        <input type="text" name="txtArtista" placeholder="Escribe Artista">
+        <input type="number" name="txtAnio" placeholder="Escribe Año">
+
+        <button type="submit"> Guardar </button>
+
+    </form>
+    
+    
+    <h1>Albums guardados</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Id:</td>
+                <td>Nombre:</td>
+                <td>Artista:</td>
+                <td>Año de publicacion:</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alb in listAlbums %}
+            <tr>
+                <td>{{ alb.0 }}</td>
+                <td>{{ alb.1 }}</td>
+                <td>{{ alb.2 }}</td>
+                <td>{{ alb.3 }}</td>
+                <td>
+                    <a href="/editar/{{alb.0}}">Editar</a>
+                    <a href="/borrar/{{alb.0}}">Eliminar</a>
+                    <a href=""></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{%endblock%}
