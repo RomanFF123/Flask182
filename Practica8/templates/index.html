@@ -1,74 +1,70 @@
-{%extends 'platilla.html'%}
+{% extends 'platilla.html' %}
 
-{%block body%}
-    
+{% block body %}
+    {% with mensajes= get_flashed_messages() %}
+        {% if mensajes %}
+            {% for msj in mensajes %}
+                <h3>{{ msj }}</h3>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
-    {%with mensajes= get_flashed_messages() %}
-     {% if mensajes%}
-      {% for msj in mensajes %}
-        <h3>{{ msj }}</h3>
-      {% endfor %}
-     {% endif %}
-    {%endwith%}
-
-    
     <h1 class="display-1 text-center mt-5 mb-5 text-danger">Gestion de Albums</h1>
     <div class="container">
-        <div class="row"> <!--  row  -->
-           <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-5">
+                <h2>Ingresa un nuevo Registro</h2>
                 <div class="card card-body">
-                  <form action="/guardar" method="POST">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" name="txtTitulo" placeholder="Escribe Titulo">
-                    </div>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" name="txtArtista" placeholder="Escribe Artista">
-                    </div>
-                    <div class="mb-3">
-                        <input type="number" class="form-control" name="txtAnio" placeholder="Escribe Año">
-                    </div>
-                
-                  </form>
-                   <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-outline-success"> Guardar </button>
-                   </div>
-               
-               
-               
-                </div> <!-- div Card-->
-           </div> <!-- Div 5 Espacios -->
-          
-           <div class="col-md-7"> <!-- colum 7  -->
-            <h2>Albums guardados</h2>
-    <div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <td>Id:</td>
-                <td>Nombre:</td>
-                <td>Artista:</td>
-                <td>Año de publicacion:</td>
-                <td>Acciones:</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for alb in listAlbums %}
-            <tr>
-                <td>{{ alb.0 }}</td>
-                <td>{{ alb.1 }}</td>
-                <td>{{ alb.2 }}</td>
-                <td>{{ alb.3 }}</td>
-                <td>
-                    <a href="/editar/{{alb.0}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                    <a href="/borrar/{{alb.0}}" class="btn btn-danger"><i class="bi bi-trash3"></i></a>
-                    <a href=""></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div> <!--Table responsibe-->
-           </div> <!-- colum 7  -->
-        </div> <!--  row  -->
-    </div> <!--Container-->
-{%endblock%}
+                    <form action="/guardar" method="POST">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="txtTitulo" placeholder="Escribe Titulo">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="txtArtista" placeholder="Escribe Artista">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" name="txtAnio" placeholder="Escribe Año">
+                        </div>
+                        
+                        <!-- Botón de Guardar -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-outline-success">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-7"> <!-- colum 7 -->
+                <h2>Albums guardados</h2>
+                <div class="table-responsive"> <!--Table Responsive-->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Id:</td>
+                                <td>Nombre:</td>
+                                <td>Artista:</td>
+                                <td>Año de publicacion:</td>
+                                <td>Acciones:</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for alb in listAlbums %}
+                                <tr>
+                                    <td>{{ alb.0 }}</td>
+                                    <td>{{ alb.1 }}</td>
+                                    <td>{{ alb.2 }}</td>
+                                    <td>{{ alb.3 }}</td>
+                                    <td>
+                                        <a href="/editar/{{ alb.0 }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                        <a href="/borrar/{{ alb.0 }}" class="btn btn-danger"><i class="bi bi-trash3"></i></a>
+                                        <a href=""></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div> <!--Table Responsive-->
+            </div> <!-- colum 7 -->
+        </div> <!-- row -->
+    </div> <!--Contrainer-->
+{% endblock %}

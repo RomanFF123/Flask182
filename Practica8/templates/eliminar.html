@@ -1,24 +1,32 @@
-{%extends 'platilla.html'%}
+{% extends 'platilla.html' %}
 
-{%block body%}
-    
-    <center>
-        <br>
-        <h1>Eliminar Album</h1>
-        <h3>Seguro que quieres eliminar este album?</h3>
-        <br>
-        <br>
-        <form action="/eliminar/{{album.0}}" method="POST">
-            <input type="text" name="txtTitulo", value="{{album.1}}",readonly>
-            <input type="text" name="txtArtista", value="{{album.2}}", readonly>
-            <input type="number" name="txtAnio", value="{{album.3}}", readonly>
-    
-            <button type="submit">Eliminar</button>
-            <a href="{{url_for('index')}}"><button type="button">Cancelar</button></a>
-    
-        </form>
-    </center>
-
-{%endblock%}
-
-
+{% block body %}
+<center>
+<div class="container-xxl">
+    <h1 class="display-4 text-secondary mt-5">Eliminar Album</h1>
+    <div class="col-md-5">
+        <div class="card card-body">
+            <h2 class="display-8 mt-2 mb-4">¿Seguro que quieres eliminar este álbum?</h2>
+            <form action="/eliminar/{{ album.0 }}" method="POST">
+                <div class="mb-3">
+                    <h2 class="display-7 mt-2 mb-2">Album:</h2>
+                    <input type="text" class="form-control" name="txtTitulo" value="{{ album.1 }}" readonly>
+                </div>
+                <div class="mb-3">
+                    <h2 class="display-7 mt-2 mb-2">Artista:</h2>
+                    <input type="text" class="form-control" name="txtArtista" value="{{ album.2 }}" readonly>
+                </div>
+                <div class="mb-3">
+                    <h2 class="display-7 mt-2 mb-2">Año:</h2>
+                    <input type="number" class="form-control" name="txtAnio" value="{{ album.3 }}" readonly>
+                </div>            
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{{ url_for('index') }}"><button class="btn btn-warning" type="button">Cancelar</button></a>
+                    <button type="submit" class="btn btn-danger me-md-2"><i class="bi bi-trash"></i>Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}
